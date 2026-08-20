@@ -19,6 +19,8 @@
                     <img src="{{ movie.image.url }}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">{{ movie.title }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ movie.year }}</h6>
+                        <p class="card-text"><span class="badge bg-secondary">{{ movie.genre }}</span></p>
                         <p class="card-text">{{ movie.description }}</p>
                         {% if movie.url %}
                             <a href="{{ movie.url }}" class="btn btn-primary">Movie Link</a>
