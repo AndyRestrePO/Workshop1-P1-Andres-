@@ -8,8 +8,12 @@ from .models import Movie
 
 # Create your views here.
 def home(request):
-    movies = Movie.objects.all()
-    return render(request, 'home.html', {'movies': movies})
+    search_movie = request.GET.get('searchMovie', '')
+    if search_movie:
+        movies = Movie.objects.filter(title__icontains=search_movie)
+    else:
+        movies = Movie.objects.all()
+    return render(request, 'home.html', {'movies': movies, 'searchMovie': search_movie})
 
 def about(request):
     return render(request, 'about.html')

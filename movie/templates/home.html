@@ -3,6 +3,17 @@
     <h1>Andrés Restrepo Giraldo</h1>
     <h2>This is the full home page</h2>
 
+    <!-- Barra de búsqueda de películas por título -->
+    <form method="get" action="{% url 'home' %}" class="row row-cols-lg-auto g-2 align-items-end mb-3">
+        <div class="col-12 mb-3">
+            <label for="searchMovie" class="form-label">Search movie</label>
+            <input type="text" class="form-control" id="searchMovie" name="searchMovie" value="{{ searchMovie }}" placeholder="Buscar película">
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary mb-3">Buscar</button>
+        </div>
+    </form>
+
     <!-- Un card por cada película con sus correspondientes atributos -->
     <div class="row row-cols-1 row-cols-md-3 g-4">
         {% for movie in movies %}
