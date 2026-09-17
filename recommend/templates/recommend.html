@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Recomendador de películas</h1>
+    <p>Describe qué tipo de película quieres ver y te recomendaremos la más parecida.</p>
+
+    <form method="get" action="{% url 'recommend' %}" class="row row-cols-lg-auto g-2 align-items-end mb-3">
+        <div class="col-12 mb-3">
+            <label for="prompt" class="form-label">¿Qué película buscas?</label>
+            <input type="text" class="form-control" id="prompt" name="prompt" value="{{ prompt }}" placeholder="Ej: película de la segunda guerra mundial">
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary mb-3">Recomendar</button>
+        </div>
+    </form>
+
+    {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+
+    {% if recommended_movie %}
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="card">
+                    <img src="{{ recommended_movie.image.url }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ recommended_movie.title }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ recommended_movie.year }}</h6>
+                        <p class="card-text"><span class="badge bg-secondary">{{ recommended_movie.genre }}</span></p>
+                        <p class="card-text">{{ recommended_movie.description }}</p>
+                        <p class="card-text"><small class="text-muted">Similitud: {{ similarity_score|floatformat:4 }}</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% elif prompt %}
+        <p>No se encontró ninguna recomendación.</p>
+    {% endif %}
+{% endblock content %}
